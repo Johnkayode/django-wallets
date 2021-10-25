@@ -1,5 +1,5 @@
 from django import forms
-from django.forms.widgets import PasswordInput, TextInput, EmailInput, FileInput, NumberInput
+from django.forms.widgets import PasswordInput, TextInput, EmailInput, FileInput, NumberInput, DateInput
 from .models import CustomUser
 
 
@@ -9,16 +9,17 @@ from .models import CustomUser
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password1 = forms.CharField(widget=PasswordInput(attrs={'class':'form-control', 'placeholder':'', 'required':'required'}))
-    password2 = forms.CharField(widget=PasswordInput(attrs={'class':'form-control', 'placeholder':'', 'required':'required'}))
+    password1 = forms.CharField(widget=PasswordInput(attrs={'class':'form-control', 'placeholder':'Password', 'required':'required'}))
+    password2 = forms.CharField(widget=PasswordInput(attrs={'class':'form-control', 'placeholder':'Confirm Password', 'required':'required'}))
 
     class Meta:
         model = CustomUser
-        fields = ('first_name','last_name','email') 
+        fields = ('first_name','last_name','email','date_of_birth') 
         widgets = {
-        'first_name':TextInput(attrs={'class':'form-control', 'placeholder':'', 'required':'required'}),
-        'last_name':TextInput(attrs={'class':'form-control', 'placeholder':'', 'required':'required'}),
-        'email': EmailInput(attrs={'class':'form-control', 'placeholder':'', 'required':'required'}),
+        'first_name':TextInput(attrs={'class':'form-control', 'placeholder':'First Name', 'required':'required'}),
+        'last_name':TextInput(attrs={'class':'form-control', 'placeholder':'Last Name', 'required':'required'}),
+        'email': EmailInput(attrs={'class':'form-control', 'placeholder':'Email', 'required':'required'}),
+        'date_of_birth': DateInput(attrs={'class':'form-control', 'placeholder':'Date of Birth', 'required':'required','type': 'date'}),
     }
 
     def clean_password2(self):

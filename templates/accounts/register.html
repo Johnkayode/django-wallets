@@ -1,15 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="/">
-        {{form}}
-    </form>
+{% extends 'base.html'%}
+
+{% block body %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel='stylesheet' href="{%static 'css/main.css'%}">
+
+
+    <!-- ACCOUNT PAGE -->
+    <div class="container">
+        <form class="form-signin" method="post" action="{% url 'register' %}">
+
+            <h2 class="form-signin-heading text-center">Register</h2>
+            {% if form.errors %}
+                <p class='text-danger text-center'>User already exists</p>
+            {% endif %}
+            <label for="inputEmail" class="sr-only">First Name</label>
+            {{ form.first_name}}
+            <label for="inputEmail" class="sr-only">Last Name</label>
+            {{ form.last_name}}
+            <label for="inputEmail" class="sr-only">Email</label>
+            {{ form.email}}
+            <label for="inputPassword" class="sr-only">Date of birth</label>
+            {{ form.date_of_birth}}
+            <label for="inputPassword" class="sr-only">Password</label>
+            {{ form.password1 }}
+            <label for="inputPassword" class="sr-only">Confirm Password</label>
+            {{ form.password2 }}
+            <div class='invalid-feedback hidden' id='no-match'>
+                <span style='font-size: x-small;'>Passwords do not match</span>
+            </div>
+            {% csrf_token %}
+            
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+            <div>
+                <small class='text-muted text-sm'>Already have an account? <a href="#" >Log in</a></small>
+            </div>
+        </form>
+
+    </div>
+    <script>
+        function seePassWord(){
+            var password_ = document.getElementById('id_password');
+            console.log(password_.type)
+            if (password_.type === 'password'){
+                console.log('yes')
+                password_.type = 'text';
+            }else{
+                password_.type = 'password';
+            }
+        }
+        function seePassWord2(){
+            var password_ = document.getElementById('id_password_');
+            console.log(password_.type)
+            if (password_.type === 'password'){
+                console.log('yes')
+                password_.type = 'text';
+            }else{
+                password_.type = 'password';
+            }
+        };
+
+        var password = document.getElementById('id_password_');
+        console.log(password)
+
+        password.addEventListener('keyup', function(e){
+            var pass = document.getElementById('id_password').value;
+            var pass_ = document.getElementById('id_password_').value;
+            if (pass != pass_){
+                
+                document.getElementById('no-match').classList.remove('hidden');
+                document.getElementById('id_password_').classList.add('is-invalid')
+
+            }else{
+                document.getElementById('no-match').classList.add('hidden');
+                document.getElementById('id_password_').classList.remove('is-invalid')
+            }
+        })
     
-</body>
-</html>
+
+
+       
+    </script>
+
+{% endblock %}

@@ -1,3 +1,8 @@
-from django.db import models
+from django.db import models, transaction
 
-# Create your models here.
+""""
+class WalletTransaction(models.Model):
+    transaction_id = models.CharField()
+    status = models.Choices()
+    pass
+"""
