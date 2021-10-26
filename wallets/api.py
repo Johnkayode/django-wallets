@@ -108,6 +108,7 @@ class WalletsClient:
 
 
         resp = json.loads(r.text, strict=False)
+        print(resp)
         return resp
 
     def retrieve_user_nuban(self, phone_number):
@@ -341,7 +342,5 @@ class WalletsClient:
 
 
 
-wallet = WalletsClient(secret_key="hfucj5jatq8h", public_key="uvjqzm5xl6bw")
-print(wallet.debit_user(transaction_id="271670328", phone_number="08057998539", amount=200))
 
 

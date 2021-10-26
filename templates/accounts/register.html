@@ -8,7 +8,7 @@
 
     <!-- ACCOUNT PAGE -->
     <div class="container">
-        <form class="form-signin" method="post" action="{% url 'register' %}">
+        <form class="form-signin" method="post" action="{% url 'accounts:register' %}">
 
             <h2 class="form-signin-heading text-center">Register</h2>
             {% if form.errors %}

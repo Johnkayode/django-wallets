@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+
+{% block body %}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&display=swap" rel="stylesheet">
+<link rel='stylesheet' href="{%static 'css/main.css'%}">
+
+
+    <!-- ACCOUNT PAGE -->
+    <div class="container">
+        <form class="form-signin" method="post" action="{% url 'accounts:verify' %}">
+
+            <h2 class="form-signin-heading text-center">Verify Account</h2>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class='text-danger text-center'>{{message|safe}} </p>
+                {% endfor %}       
+            {% endif %}
+            <label for="inputEmail" class="sr-only">BVN</label>
+            {{ form.bvn }}
+            {% csrf_token %}
+            
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Verify</button>
+        </form>
+
+    </div>
+    <script>
+       
+    </script>
+
+{% endblock %}
