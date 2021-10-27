@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 from .forms import UserRegistrationForm, CustomAuthForm, BVNForm
@@ -35,10 +35,15 @@ def login_user(request):
             user = authenticate(request, email = cd['email'], password=cd['password']) 
             if user is not None:
                 login(request, user)
-                return redirect('accounts:dashboard')
+                return redirect(request.GET.get('next','accounts:dashboard'))
             else:
                 messages.error(request, 'Account does not exist')
     return render(request, "accounts/login.html", context = {"form":form})
+
+@login_required
+def logout_user(request):
+    logout(request)
+    return redirect("accounts:login")
 
 
 @login_required

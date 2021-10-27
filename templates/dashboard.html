@@ -13,10 +13,13 @@
                 <p class='text-center'>{{request.user.email}}</p>
             </div>
             <div class="col-lg-6 mx-auto">
-                <div class="card text-light bg-success bg-gradient"> 
+                <div class="card text-light bg-success bg-gradient shadow-sm"> 
+                    <button class="btn text-light text-decoration-none copy" data-toggle="tooltip" data-placement="top" title="Copy account number to  clipboard" onclick="copyText()">
+                        <i class="fas fa-copy"></i>
+                    </button>
                     <h4 class="text-light">NGN {{wallet.balance}}</h4>
                     <div class="">
-                        <h4 class="mb-4">{{wallet.account_number}}</h4>
+                        <h4 class="mb-4" id="account-number">{{wallet.account_number}}</h4>
                         <h5 class="mb-4">{{wallet.account_name}}</h5>
                         <h5>{{wallet.bank}}</h5>
                     </div>
@@ -25,10 +28,29 @@
             </div>
             
         </div>
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <p class="text-muted">
+                    Bank transfer to the account number on the card will fund your wallet directly.
+                    
+                </p>
+            </div>
+        </div>
         
     </div>
     <script>
-             
+        function copyText() {
+            /* Get the text field */
+            var account = document.getElementById("account-number");
+
+            
+            /* Select the text field 
+            account.select();
+            account.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(account.innerText);
+        }
     </script>
 
 {% endblock %}

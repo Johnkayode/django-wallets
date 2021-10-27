@@ -20,6 +20,7 @@
             {{ form.email}}
             <label for="inputPassword" class="sr-only">Password</label>
             {{ form.password }}
+            <input type="hidden" name="next" value="{{ next }}"/>
             {% csrf_token %}
             
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>

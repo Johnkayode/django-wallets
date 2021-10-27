@@ -136,3 +136,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.CustomUser"
 
 ENCRYPTION_KEY = "NusK1lQ_SABjIqc37MMWoAtTWlVHgeTQ_rijWMewgzw="
+
+LOGIN_URL = '/account/login/'

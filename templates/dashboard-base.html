@@ -14,13 +14,18 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
         body {
-        padding-top: 40px;
+        padding-top: 10px;
         padding-bottom: 40px;
         background-color: #eee;
         }
 
+        nav{
+            padding-bottom: 80px !important;
+        }
+
         
         .card{
+            position: relative;
             margin: 20px 0px;
             padding: 20px 15px;
             font-family: Poppins;
@@ -30,12 +35,42 @@
            
         }
 
+        .navbar-brand{
+            font-family: Poppins;
+            font-size: 20px;
+            font-weight:800;
+        }
+
+        .copy{
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            cursor: pointer;
+        }
+
+        .copy:focus{
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
+
         @media only screen and (max-width: 480px) {
             .card{
                 max-width: 100% !important;
             }
         }
     </style>
+    <header>
+        <nav class="navbar px-4">
+            <div class="container-fluid">
+              <a class="navbar-brand text-success">Django Wallets</a>
+              <form class="d-flex">
+               
+                <a class="text-success h5" href="{% url 'accounts:logout' %}"> <i class="fas fa-sign-out"></i></a>
+              </form>
+            </div>
+        </nav>
+    </header>
     {% block body %}
     {% endblock %}
     <footer class="mt-5">
