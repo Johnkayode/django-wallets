@@ -1,11 +1,11 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
 from .forms import UserRegistrationForm, CustomAuthForm, BVNForm
-
+from .decorators import verified
 
 from wallets.api import WalletsClient
 from wallets.models import Wallet
@@ -40,9 +40,12 @@ def login_user(request):
                 messages.error(request, 'Account does not exist')
     return render(request, "accounts/login.html", context = {"form":form})
 
+
 @login_required
+@verified
 def dashboard(request):
-    return render(request, "dashboard.html", context={})
+    wallet = get_object_or_404(Wallet, user=request.user)
+    return render(request, "dashboard.html", context={"wallet":wallet})
 
 @login_required
 def create_wallet(request):
@@ -60,6 +63,8 @@ def create_wallet(request):
                     bvn= str(bvn)
                 )
             if new_wallet["response"]["responseCode"] == '200':
+                user.verified = True
+                user.save()
                 Wallet.objects.create(
                     user = user,
                     balance = new_wallet["data"]["availableBalance"],

@@ -1,14 +1,31 @@
-{% extends 'base.html'%}
+{% extends 'dashboard-base.html'%}
 
 {% block body %}
 {% load static %}
-<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600&display=swap" rel="stylesheet">
-<link rel='stylesheet' href="{%static 'css/main.css'%}">
 
-
+    
     <!-- DASHBOARD -->
     <div class="container">
-        <h1>{{request.user.email}}</h1>
+        
+        <div class="row">
+            <div class="col-lg-12 mx-auto">
+                <h3 class='text-center'>Hi {{request.user.first_name}} 👋</h3>
+                <p class='text-center'>{{request.user.email}}</p>
+            </div>
+            <div class="col-lg-6 mx-auto">
+                <div class="card text-light bg-success bg-gradient"> 
+                    <h4 class="text-light">NGN {{wallet.balance}}</h4>
+                    <div class="">
+                        <h4 class="mb-4">{{wallet.account_number}}</h4>
+                        <h5 class="mb-4">{{wallet.account_name}}</h5>
+                        <h5>{{wallet.bank}}</h5>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
     </div>
     <script>
              
